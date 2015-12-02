@@ -1,0 +1,60 @@
+from django.contrib.auth.models import User
+from tastypie import fields, bundle
+from tastypie.authentication import SessionAuthentication
+from tastypie.authorization import Authorization
+from tastypie.resources import ModelResource
+from app.models import AutoModel
+from django.db import IntegrityError
+from tastypie import http
+from tastypie.exceptions import ImmediateHttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
+import json
+
+class UserResource(ModelResource):
+    class Meta:
+        queryset = User.objects.all()
+        resource_name = 'user'
+        excludes = ['password']
+        authentication = SessionAuthentication()
+        #list_allowed_methods = []
+        #detail_allowed_methods = []
+
+
+class AutoModelResource(ModelResource):
+    author = fields.CharField(attribute="author", null=True)
+    
+    class Meta:
+        queryset = AutoModel.objects.all()
+        resource_name = 'auto_model'
+        authentication = SessionAuthentication()
+        authorization = Authorization()
+        always_return_data=True
+       
+            
+    def obj_update(self, bundle, **kwargs):
+        bundle = super(AutoModelResource, self).obj_update(bundle, **kwargs)
+        return bundle
+    
+    def obj_create(self, bundle, **kwargs):
+        bundle = super(AutoModelResource, self).obj_create(
+                bundle, author=bundle.request.user, **kwargs)
+        return bundle
+    
+    def obj_delete(self, bundle, **kwargs):
+        bundle = super(AutoModelResource, self).obj_delete(bundle, **kwargs)
+        return bundle
+        
+        
+    def wrap_view(self, view):
+        def wrapper(request, *args, **kwargs):
+            try:
+                callback = getattr(self, view)
+                response = callback(request, *args, **kwargs)
+                return response
+            except IntegrityError:
+                msg = 'Автомобиля с таким названием не существует'
+                return HttpResponseBadRequest(json.dumps({'message':msg}))
+        return wrapper
+
+    def dehydrate(self, bundle):
+        return bundle
