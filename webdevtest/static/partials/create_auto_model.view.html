@@ -2,7 +2,7 @@
     <div ng-controller="samplecontoller">
 	<form class="form-inline" name="car_creation_form">
 		<h4>Название</h4>
-		<input type="text" ng-model="car_creation_form.auto_name" class="input-small" required>
+		<input type="text" ng-model="car_creation_form.auto_name" class="input-small">
 		<button type="submit" class="btn btn-primary" ng-click="create_auto_model()" ng-disabled="car_creation_form.$invalid">Сохранить</button>
 		<div class="row">
 			<span ng-show="car_creation_form.error">{{car_creation_form.error}}</span>

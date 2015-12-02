@@ -4,7 +4,7 @@
 		<table class="table">
 			<tr ng-repeat="(key, value) in selected_car" ng-if='key =="name"'>
 				  <td>{{ key }}</td>
-				  <td><input type="text" ng-model="editing_form.auto_name" class="input-small" value="{{value}}" ng-init="editing_form.auto_name=value" required></td>
+				  <td><input type="text" ng-model="editing_form.auto_name" class="input-small" value="{{value}}" ng-init="editing_form.auto_name=value"></td>
 			</tr>
 			<tr ng-repeat="(key, value) in selected_car" ng-if='key !="name"'>
 			    <td>{{ key }}</td>
