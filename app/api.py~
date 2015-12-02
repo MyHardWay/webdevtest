@@ -50,7 +50,7 @@ class AutoModelResource(ModelResource):
                 response = callback(request, *args, **kwargs)
                 return response
             except IntegrityError:
-                msg = 'Автомобиля с таким названием не существует'
+                msg = 'Автомобиль с таким названием существует'
                 return HttpResponseBadRequest(json.dumps({'message':msg}))
         return wrapper
 

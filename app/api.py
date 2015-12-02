@@ -41,8 +41,7 @@ class AutoModelResource(ModelResource):
     def obj_delete(self, bundle, **kwargs):
         bundle = super(AutoModelResource, self).obj_delete(bundle, **kwargs)
         return bundle
-        
-        
+              
     def wrap_view(self, view):
         def wrapper(request, *args, **kwargs):
             try:
