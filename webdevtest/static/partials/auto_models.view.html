@@ -1,0 +1,24 @@
+<h3>Все реквизиты в виде таблицы</h3>
+<div ng-controller="samplecontoller">
+	<form class="form-inline" name="editing_form">
+		<table class="table">
+			<tr ng-repeat="(key, value) in selected_car" ng-if='key =="name"'>
+				  <td>{{ key }}</td>
+				  <td><input type="text" ng-model="editing_form.auto_name" class="input-small" value="{{value}}" ng-init="editing_form.auto_name=value" required></td>
+			</tr>
+			<tr ng-repeat="(key, value) in selected_car" ng-if='key !="name"'>
+			    <td>{{ key }}</td>
+			    <td>{{ value }}</td>
+			</tr>	
+		</table>
+		<button type="submit" class="btn btn-primary" ng-click="change_car_name()" ng-disabled="editing_form.$invalid">Сохранить</button>
+		<button type="submit" class="btn btn-primary" ng-click="delete_car()">Удалить</button>
+		<div class="row">
+			<span ng-show="editing_form.error">{{editing_form.error}}</span>
+		</div>
+
+	</form>
+</div>
+
+
+

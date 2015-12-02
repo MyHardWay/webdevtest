@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h1>Модели автомобилей</h1>
+</div>
+<div ng-controller="samplecontoller">
+<div class="col-lg-4">
+
+    <ul class="nav nav-list" id='ui-sref-menu'>
+        <li>
+            <a ui-sref="auto_model.create" ui-sref-opts="{reload: true, notify: true}"> <span class="glyphicon glyphicon-plus"></span> Добавить модель</a>
+        </li>
+
+        <li ng-repeat="auto_model in auto_models track by auto_model.id" ui-sref-active="active">
+            <a ui-sref="auto_model.view({car_model_id:auto_model.id})" ui-sref-opts="{reload: true}">{{ auto_model.name }}</a>
+        </li>
+    </ul>
+</div>
+</div>
+<div class="col-lg-8">
+    <div ui-view>
+        <div class="jumbotron text-center">
+            Выберите автомобиль из списка слева
+        </div>
+    </div>
+
+</div>

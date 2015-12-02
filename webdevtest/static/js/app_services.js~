@@ -1,0 +1,7 @@
+app.service('changeViewService', function() {
+
+  var index = 0
+
+  return {index: index}
+
+  }})

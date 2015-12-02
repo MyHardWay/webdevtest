@@ -1,0 +1,11 @@
+<h3>Создать новую модель автомобиля</h3>
+    <div ng-controller="samplecontoller">
+	<form class="form-inline" name="carCreationForm">
+		<h4>Название</h4>
+		<input type="text" ng-model="carCreationForm.auto_name" class="input-small" required>
+		<button type="submit" class="btn btn-primary" ng-click="create_auto_model()" ng-disabled="carCreationForm.$invalid">Сохранить</button>
+		<div class="row">
+			<span ng-show="carCreationForm.error">{{carCreationForm.error}}</span>
+		</div>
+	</form>
+</div>	

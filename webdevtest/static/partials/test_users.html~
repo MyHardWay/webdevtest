@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h1>Пользователи</h1>
+</div>
+
+<div class="col-lg-4">
+    <div ng-app="sampleapp">
+	<div ng-controller="samplecontoller">
+	    	<ul class="nav nav-list">
+        		<li ng-repeat="user in users" ng-click="select(user)">
+            			<div><a class="paginationclass" ui-sref="user.view({userId:user.id})" ng-class="{active: isActive(user)">{{ user.username }}</a></div>
+        		</li> 
+	
+    		</ul>
+	</div>
+    </div>
+</div>
+
+<div class="col-lg-8">
+    <div ui-view>
+        <div class="jumbotron text-center">
+            Выберите пользователя из списка слева
+        </div>
+    </div>
+
+</div>
+
+
+
+
