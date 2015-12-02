@@ -24,11 +24,10 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-import os
-
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__)).replace('\\','/')
 
-TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),)
+TEMPLATE_DIRS = (os.path.join(
+        os.path.dirname(__file__), 'templates').replace('\\','/'),)
 
 ALLOWED_HOSTS = []
 

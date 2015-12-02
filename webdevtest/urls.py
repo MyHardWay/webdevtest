@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 
 #Tastypie API
 from tastypie.api import Api
-from app.api import *
+from app.api import AutoModelResource, UserResource
 
 v1_api = Api(api_name='v1')
 

@@ -4,13 +4,10 @@ from django.contrib import admin
 from app.models import AutoModel
 
 
-
-#admin.site.register(AutoModel)
-
-class EssayAdmin(admin.ModelAdmin):
+class AutoAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         if getattr(obj, 'author', None) is None:
             obj.author = request.user
         obj.save()
         
-admin.site.register(AutoModel, EssayAdmin)
+admin.site.register(AutoModel, AutoAdmin)

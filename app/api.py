@@ -1,14 +1,13 @@
 from django.contrib.auth.models import User
-from tastypie import fields, bundle
+from django.db import IntegrityError
+from django.http import HttpResponseBadRequest
+from tastypie import fields
 from tastypie.authentication import SessionAuthentication
 from tastypie.authorization import Authorization
 from tastypie.resources import ModelResource
+
 from app.models import AutoModel
-from django.db import IntegrityError
-from tastypie import http
-from tastypie.exceptions import ImmediateHttpResponse
-from django.http import HttpResponse, HttpResponseBadRequest
-import json
+
 
 class UserResource(ModelResource):
     class Meta:
@@ -16,9 +15,6 @@ class UserResource(ModelResource):
         resource_name = 'user'
         excludes = ['password']
         authentication = SessionAuthentication()
-        #list_allowed_methods = []
-        #detail_allowed_methods = []
-
 
 class AutoModelResource(ModelResource):
     author = fields.CharField(attribute="author", null=True)
@@ -53,8 +49,6 @@ class AutoModelResource(ModelResource):
                 return response
             except IntegrityError:
                 msg = 'Автомобиля с таким названием не существует'
-                return HttpResponseBadRequest(json.dumps({'message':msg}))
+                return HttpResponseBadRequest({'message':msg})
         return wrapper
 
-    def dehydrate(self, bundle):
-        return bundle
