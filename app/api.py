@@ -27,8 +27,7 @@ class AutoModelResource(ModelResource):
         authentication = SessionAuthentication()
         authorization = Authorization()
         always_return_data=True
-       
-            
+                 
     def obj_update(self, bundle, **kwargs):
         bundle = super(AutoModelResource, self).obj_update(bundle, **kwargs)
         return bundle
